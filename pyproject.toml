@@ -28,7 +28,7 @@ dependencies = [
   "habluetooth>=3.42.0",
   "orjson>=3.8.1",
   "yarl",
-  "zeroconf>=0.148.0"
+  "zeroconf>=0.148.0",
 ]
 
 [project.optional-dependencies]
@@ -58,7 +58,7 @@ include = ["aioshelly*"]
 asyncio_default_fixture_loop_scope = "function"
 
 [tool.ty.environment]
-python-version = "3.11"
+python = ".venv"
 
 [tool.ruff]
 target-version = "py311"

@@ -584,6 +584,34 @@ class RpcDevice:
         params = {"on": value}
         await self.call_rpc("Ui.Screen.Set", params)
 
+    async def wall_display_set_screen_brightness_level(self, level: int) -> None:
+        """Set Wall Display backlight brightness."""
+        _LOGGER.info("set brightness")
+        params = {"config": {"brightness": {"level": level, "auto": False}}}
+        await self.call_rpc("Ui.SetConfig", params)
+
+    async def wall_display_set_screen_brightness_auto(self, auto: bool = True) -> None:
+        """Set Wall Display backlight auto mode."""
+        _LOGGER.info("set brightness")
+        params = {"config": {"brightness": {"auto": auto}}}
+        await self.call_rpc("Ui.SetConfig", params)
+
+    async def wall_display_set_screen_auto_off(self, value: bool | int = 10) -> None:
+        """Set Wall Display backlight auto_off mode."""
+        _LOGGER.info("set brightness")
+        params = {
+            "config": {
+                "brightness": {
+                    "auto": True,
+                    "auto_off": {
+                        "enable": value if isinstance(value, bool) else True,
+                        "timeout": value if isinstance(value, int) else 10,
+                    },
+                }
+            }
+        }
+        await self.call_rpc("Ui.SetConfig", params)
+
     async def kvs_get(self, key: str) -> dict[str, Any]:
         """Get value from KVS."""
         params = {"key": key}
